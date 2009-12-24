@@ -1,0 +1,27 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="mConsole"
+    >
+          
+  <browser:addMenuItem
+      class=".mConsole.base"
+      title="mConsole Base"
+      permission="zope.Public"
+  />
+    <browser:page
+        for=".mConsole.base"
+	name="index.html"
+        class=".mConsole.MessageView"
+	permission="zope.Public"
+    />
+
+    <content class=".mConsole.base">
+      <require
+        permission="zope.Public"
+	attributes="greeting subject"
+    />
+</content>
+                    
+</configure>
+
