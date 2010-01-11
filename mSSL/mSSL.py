@@ -9,6 +9,17 @@ import os,sys
 import xml.etree.ElementTree as ConfigTree
 from xml.etree.ElementTree import Element
 import pytils.translit
+import locale
+import gettext
+
+APP="mSSL"
+DIR='locale'
+locale.setlocale(locale.LC_ALL, '')
+gettext.bindtextdomain(APP,DIR)
+gettext.textdomain(APP)
+gtk.glade.bindtextdomain(APP,DIR)
+gtk.glade.textdomain(APP)
+_ = gettext.gettext
 
 gladefile = "mSSL.glade"
 
@@ -23,7 +34,7 @@ elif sys.platform == "win32" :
 	properties_file = os.environ['APPDATA']+"\\.mSSL"
 	openSSL_bin_filter = "openssl.exe"
 	openSSL_bin_default = "C:\\openSSL\\bin\\openssl.exe"
-	workdir_default = unicode ( os.environ['USERPROFILE'].decode('cp1251') + "\\Рабочий стол\\" )
+	workdir_default = unicode ( os.environ['USERPROFILE'].decode('cp1251') + "\\Desktop\\" )
 	path_separator="\\"	
 	tmpdir=os.environ['TMP']
 else:
@@ -33,7 +44,7 @@ else:
 if not os.path.exists(properties_file):
 	print ( "Creating config" )
 	config = ConfigTree.Element("config")
-	# Описания пользователя
+	# User defination
 	user_creditionals = ConfigTree.SubElement (config, "user_creditionals")
 	user_creditionals.set ("step","0")
         countryName = ConfigTree.SubElement (user_creditionals, "countryName")
@@ -54,7 +65,7 @@ if not os.path.exists(properties_file):
 	emailAddress.text =".@."
         UID = ConfigTree.SubElement (user_creditionals, "UID")
 	UID.text = "."
-	# Настройки программы
+	# Program preferences
         preferences = ConfigTree.SubElement (config, "preferences")
         workdir = ConfigTree.SubElement (preferences, "workdir")
 	workdir.text = workdir_default
@@ -73,7 +84,7 @@ start_step=int(config.find("user_creditionals").get("step"))
 class mSSLgui:
 	def __init__(self):
 		windowname = "mSSLwindow"
-		self.wTree = gtk.glade.XML (gladefile,windowname)
+		self.wTree = gtk.glade.XML (gladefile,windowname,APP)
 		window = self.wTree.get_widget( windowname )
 		dic = { 
 			"on_imagemenuitem_about_activate" : self.about_show,
@@ -88,22 +99,22 @@ class mSSLgui:
 		
 		if start_step == 0 :
 				main_progress.set_fraction(0)
-				main_progress.set_text("1/" + str(max_step) + unicode(" Получение корневоого сертификата"))
+				main_progress.set_text ("1/" + str(max_step) + unicode(" Getting Root-certificate"))
 		elif start_step == 1 :
 				main_progress.set_fraction(1.0/max_step)
-				main_progress.set_text("2/" + str(max_step) + unicode(" Генерация секретного ключа"))
+				main_progress.set_text("2/" + str(max_step) + unicode(" Generating private key"))
 		elif start_step == 2 :
 				main_progress.set_fraction(2.0/max_step)
-				main_progress.set_text("3/" + str(max_step) + unicode(" Генерация запроса сертификата"))
+				main_progress.set_text("3/" + str(max_step) + unicode(" Generating certificate requaest"))
 		elif start_step == 3 :
 				main_progress.set_fraction(3.0/max_step)
-				main_progress.set_text("4/" + str(max_step) + unicode(" Получение сертификата"))
+				main_progress.set_text("4/" + str(max_step) + unicode(" Getting own certificate"))
 		elif start_step == 4 :
 				main_progress.set_fraction(4.0/max_step)
-				main_progress.set_text("5/" + str(max_step) + unicode(" Создание пакета PKCS12"))
+				main_progress.set_text("5/" + str(max_step) + unicode(" Building PKCS12 package"))
 		elif start_step == 5 :
 				main_progress.set_fraction(1)
-				main_progress.set_text(unicode("Пакет с сертификатом создан !"))
+				main_progress.set_text(unicode("Package created sucessfully !"))
 		window.connect("destroy", self.close_app)
 		window.show()
 	
@@ -208,8 +219,8 @@ class mSSLgui:
 		if step == 0 :
 				if not os.path.exists( workdir_path +"cacert.pem" ) :
 					dialog = gtk.MessageDialog(None, gtk.DIALOG_MODAL, gtk.MESSAGE_ERROR,gtk.BUTTONS_CLOSE, 
-							unicode("Файл корневого сертификата \n" + workdir_path + "cacert.pem не найден!\n" +
-								"Этот файл Вы можете получить в центре выдачи цифровых сертификатов Организации"))
+							unicode("Root certificate \n" + workdir_path + "cacert.pem not found!\n" +
+								"This file you may get in Certificate Center of your company."))
 					dialog.run()
 					dialog.destroy()
 				else :
@@ -217,7 +228,7 @@ class mSSLgui:
 					config.find("user_creditionals").set ("step",str(step))
 					ctree.write ( properties_file )
 					main_progress.set_fraction(1.0/max_step)
-					main_progress.set_text("2/" + str(max_step) + unicode(" Генерация секретного ключа"))	
+					main_progress.set_text("2/" + str(max_step) + unicode(" Generating private key"))	
 		elif step == 1 :
 				cur_command = openssl_bin_program + ' genrsa -out "' + workdir_path + 'privkey.pem" 2048'
 				if sys.platform == "win32" :
@@ -226,23 +237,22 @@ class mSSLgui:
 					os.system(cur_command)
 				if os.path.exists( workdir_path +"privkey.pem" ) :
 					dialog = gtk.MessageDialog(None, gtk.DIALOG_MODAL, gtk.MESSAGE_INFO,gtk.BUTTONS_OK, 
-								unicode("Файл приватного ключа  \n" + workdir_path + "private.pem успешно создан!\n"))
+								unicode("Private key  \n" + workdir_path + "private.pem created sucessfully!\n"))
 					dialog.run()
 					dialog.destroy()				
 					if not step == max_step : step += 1
 					config.find("user_creditionals").set ("step",str(step))
 					ctree.write ( properties_file )
 					main_progress.set_fraction(2.0/max_step)
-					main_progress.set_text("3/" + str(max_step) + unicode(" Генерация запроса сертификата"))
+					main_progress.set_text("3/" + str(max_step) + unicode(" Generating certificate request"))
 				else :
 					dialog = gtk.MessageDialog(None, gtk.DIALOG_MODAL, gtk.MESSAGE_ERROR,gtk.BUTTONS_CLOSE, 
-							unicode("Файл приватного ключа \n" + workdir_path + "private.pem не создан!" +
-								"Произошла непредвиденная ошибка: обратитесь в службу технической поддержки."))
+							unicode("Private key \n" + workdir_path + "private.pem doesn't created!" +
+								"An unexpected error occured: contact support."))
 					dialog.run()
 					dialog.destroy()
 					
 		elif step == 2 :
-				#Создаем файл конфигурации для OpenSSL				
 				tmpconfig = tmpdir + path_separator + "mssl.tmp"		
 				tmpconfig_file = open (tmpconfig,'w')
 				tmpconfig_file.write ( "[ req ]\ndistinguished_name      = req_distinguished_name\n[ req_distinguished_name ]" )
@@ -258,34 +268,34 @@ class mSSLgui:
 
 				if os.path.exists( workdir_path +"user-cert.csr" ) :
 					dialog = gtk.MessageDialog(None, gtk.DIALOG_MODAL, gtk.MESSAGE_INFO,gtk.BUTTONS_OK, 
-								unicode("Файл запроса сертификата  \n" + workdir_path + "user-cert.csr успешно создан!\n"))
+								unicode("Certificate request  \n" + workdir_path + "user-cert.csr created sucessfully!\n"))
 					dialog.run()
 					dialog.destroy()				
 					if not step == max_step : step += 1
 					config.find("user_creditionals").set ("step",str(step))
 					ctree.write ( properties_file )
 					main_progress.set_fraction(3.0/max_step)
-					main_progress.set_text("4/" + str(max_step) + unicode(" Получение сертификата"))
+					main_progress.set_text("4/" + str(max_step) + unicode(" Getting personal certificate"))
 				else :
 					dialog = gtk.MessageDialog(None, gtk.DIALOG_MODAL, gtk.MESSAGE_ERROR,gtk.BUTTONS_CLOSE, 
-							unicode("Файл запроса сертификата \n" + workdir_path + "user-cert.csr не создан!" +
-								"Произошла непредвиденная ошибка: обратитесь в службу технической поддержки."))
+							unicode("Certificate request \n" + workdir_path + "user-cert.csr doesn't created!" +
+								"An unexpected error occured: contact support."))
 					dialog.run()
 					dialog.destroy()
 		elif step == 3 :
 				if os.path.exists( workdir_path +"user-cert.pem" ) :
 					dialog = gtk.MessageDialog(None, gtk.DIALOG_MODAL, gtk.MESSAGE_INFO,gtk.BUTTONS_OK, 
-								unicode("Файл сертификата  \n" + workdir_path + "user-cert.pem получен!\n"))
+								unicode("Certificate  \n" + workdir_path + "user-cert.pem get sucessfully!\n"))
 					dialog.run()
 					dialog.destroy()				
 					if not step == max_step : step += 1
 					config.find("user_creditionals").set ("step",str(step))
 					ctree.write ( properties_file )
 					main_progress.set_fraction(4.0/max_step)
-					main_progress.set_text("5/" + str(max_step) + unicode(" Создание пакета PKCS12"))
+					main_progress.set_text("5/" + str(max_step) + unicode(" Creating PKCS12 package"))
 				else :
 					dialog = gtk.MessageDialog(None, gtk.DIALOG_MODAL, gtk.MESSAGE_ERROR,gtk.BUTTONS_CLOSE, 
-							unicode("Файл сертификата \n" + workdir_path.decode("utf-8") + "user-cert.pem не получен!" ))
+							unicode("Certificate \n" + workdir_path.decode("utf-8") + "user-cert.pem not found!" ))
 					dialog.run()
 					dialog.destroy()
 
@@ -311,7 +321,7 @@ class mSSLgui:
 
 				if os.path.exists( workdir_path +"user.p12" ) :
 					dialog = gtk.MessageDialog(None, gtk.DIALOG_MODAL, gtk.MESSAGE_INFO,gtk.BUTTONS_OK, 
-								unicode("Файл пакета \n" + workdir_path + "user.p12 успешно создан!\n"))
+								unicode("Package \n" + workdir_path + "user.p12 created sucessfully!\n"))
 					dialog.run()
 					dialog.destroy()				
 					if not step == max_step :
@@ -319,25 +329,25 @@ class mSSLgui:
 						config.find("user_creditionals").set ("step",str(step))
 						ctree.write ( properties_file )
 						main_progress.set_fraction(1)
-						main_progress.set_text(unicode("Пакет с сертификатом создан !"))
+						main_progress.set_text(unicode("Packege created sucessfully!"))
 				else :
 					dialog = gtk.MessageDialog(None, gtk.DIALOG_MODAL, gtk.MESSAGE_ERROR,gtk.BUTTONS_CLOSE, 
-							unicode("Файл сертификата \n" + workdir_path + "user.p12 не создан! \n" + 
-								"Произошла непредвиденная ошибка: обратитесь в службу технической поддержки." ))
+							unicode("Package \n" + workdir_path + "user.p12 does't created! \n" + 
+								"An unexpected error occured: contact support." ))
 					dialog.run()
 					dialog.destroy()
 
 	def reset_clicked(self, widget):
 		dialog = gtk.MessageDialog(None, gtk.DIALOG_MODAL, gtk.MESSAGE_QUESTION,gtk.BUTTONS_YES_NO, 
-			unicode("Данное действие удалит все сгенерированые файлы в рабочей директории, в том числе и корневой сертификат организации.\nПродолжить?"))
+			unicode("This action remove all created files in working directory.\nContinue?"))
 		response=dialog.run()
 		dialog.destroy()				
 		if response == gtk.RESPONSE_YES :
-			for f in ['privkey.pem','cacert.pem','user-cert.pem','user-cert.csr','user.p12'] :
+			for f in ['privkey.pem','user-cert.pem','user-cert.csr','user.p12'] :
 				try:
 					os.remove( config.find("preferences/workdir").text + path_separator + f )
 				except:
-					print unicode("Невозможно удалить файл " + f)
+					print unicode("Unable to remove " + f)
 			config.find("user_creditionals").set ("step","0")
 			ctree.write ( properties_file )
 			gtk.main_quit()
