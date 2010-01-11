@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE glade-interface SYSTEM "glade-2.0.dtd">
-<!--Generated with glade3 3.4.5 on Fri Dec 18 16:53:07 2009 -->
+<!--Generated with glade3 3.4.5 on Mon Jan 11 08:24:00 2010 -->
 <glade-interface>
   <widget class="GtkWindow" id="mSSLwindow">
     <property name="title" translatable="yes">mSSL</property>
@@ -325,9 +325,8 @@ IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING WILL ANY C
 17. Interpretation of Sections 15 and 16.
 
 If the disclaimer of warranty and limitation of liability provided above cannot be given local legal effect according to their terms, reviewing courts shall apply local law that most closely approximates an absolute waiver of all civil liability in connection with the Program, unless a warranty or assumption of liability accompanies a copy of the Program in return for a fee.</property>
-    <property name="authors">Олег Ключкин
-Иван Оболенский
-pytils: Yury Yurevich &lt;the pythy at gmail com&gt;</property>
+    <property name="authors">Олег AnViar Ключкин oleg.kluchkin@gmail.com
+Иван Оболенский</property>
     <property name="wrap_license">True</property>
     <signal name="response" handler="on_mSSLabout_response"/>
     <child internal-child="vbox">
@@ -371,40 +370,124 @@ pytils: Yury Yurevich &lt;the pythy at gmail com&gt;</property>
             <property name="n_rows">8</property>
             <property name="n_columns">2</property>
             <child>
-              <widget class="GtkComboBox" id="country_combobox">
+              <widget class="GtkEntry" id="UID_entry">
                 <property name="visible">True</property>
-                <property name="items" translatable="yes">Russia
-France
-Ukraine
-USA</property>
+                <property name="can_focus">True</property>
               </widget>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="right_attach">2</property>
+                <property name="top_attach">7</property>
+                <property name="bottom_attach">8</property>
               </packing>
             </child>
             <child>
-              <widget class="GtkLabel" id="country_label">
+              <widget class="GtkLabel" id="uid_label">
                 <property name="visible">True</property>
-                <property name="label" translatable="yes">Страна</property>
-              </widget>
-            </child>
-            <child>
-              <widget class="GtkLabel" id="label7">
-                <property name="visible">True</property>
-                <property name="label" translatable="yes">Название населенного пункта</property>
+                <property name="label" translatable="yes">UID</property>
               </widget>
               <packing>
-                <property name="top_attach">1</property>
-                <property name="bottom_attach">2</property>
+                <property name="top_attach">7</property>
+                <property name="bottom_attach">8</property>
               </packing>
             </child>
             <child>
-              <widget class="GtkLabel" id="label8">
+              <widget class="GtkEntry" id="emailAddress_entry">
                 <property name="visible">True</property>
-                <property name="label" translatable="yes">Тип населенного пункта</property>
+                <property name="can_focus">True</property>
               </widget>
               <packing>
+                <property name="left_attach">1</property>
+                <property name="right_attach">2</property>
+                <property name="top_attach">6</property>
+                <property name="bottom_attach">7</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkLabel" id="mail_label">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Адрес электронной почты</property>
+              </widget>
+              <packing>
+                <property name="top_attach">6</property>
+                <property name="bottom_attach">7</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkEntry" id="commonName_entry">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+              </widget>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="right_attach">2</property>
+                <property name="top_attach">5</property>
+                <property name="bottom_attach">6</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkLabel" id="name_label">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">ФИО</property>
+              </widget>
+              <packing>
+                <property name="top_attach">5</property>
+                <property name="bottom_attach">6</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkEntry" id="organizationalUnitName_entry">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+              </widget>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="right_attach">2</property>
+                <property name="top_attach">4</property>
+                <property name="bottom_attach">5</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkLabel" id="ou_label">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Подразделение</property>
+              </widget>
+              <packing>
+                <property name="top_attach">4</property>
+                <property name="bottom_attach">5</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkEntry" id="organizationName_entry">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+              </widget>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="right_attach">2</property>
+                <property name="top_attach">3</property>
+                <property name="bottom_attach">4</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkLabel" id="org_label">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Имя организации</property>
+              </widget>
+              <packing>
+                <property name="top_attach">3</property>
+                <property name="bottom_attach">4</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="GtkComboBox" id="stateOrProvinceName_combobox">
+                <property name="visible">True</property>
+                <property name="items" translatable="yes">city
+province</property>
+              </widget>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="right_attach">2</property>
                 <property name="top_attach">2</property>
                 <property name="bottom_attach">3</property>
               </packing>
@@ -423,126 +506,42 @@ USA</property>
               </packing>
             </child>
             <child>
-              <widget class="GtkComboBox" id="stateOrProvinceName_combobox">
+              <widget class="GtkLabel" id="label8">
                 <property name="visible">True</property>
-                <property name="items" translatable="yes">city
-province</property>
+                <property name="label" translatable="yes">Тип населенного пункта</property>
               </widget>
               <packing>
-                <property name="left_attach">1</property>
-                <property name="right_attach">2</property>
                 <property name="top_attach">2</property>
                 <property name="bottom_attach">3</property>
               </packing>
             </child>
             <child>
-              <widget class="GtkLabel" id="org_label">
+              <widget class="GtkLabel" id="label7">
                 <property name="visible">True</property>
-                <property name="label" translatable="yes">Имя организации</property>
+                <property name="label" translatable="yes">Название населенного пункта</property>
               </widget>
               <packing>
-                <property name="top_attach">3</property>
-                <property name="bottom_attach">4</property>
+                <property name="top_attach">1</property>
+                <property name="bottom_attach">2</property>
               </packing>
             </child>
             <child>
-              <widget class="GtkEntry" id="organizationName_entry">
+              <widget class="GtkLabel" id="country_label">
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
+                <property name="label" translatable="yes">Страна</property>
+              </widget>
+            </child>
+            <child>
+              <widget class="GtkComboBox" id="country_combobox">
+                <property name="visible">True</property>
+                <property name="items" translatable="yes">Russia
+France
+Ukraine
+USA</property>
               </widget>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="right_attach">2</property>
-                <property name="top_attach">3</property>
-                <property name="bottom_attach">4</property>
-              </packing>
-            </child>
-            <child>
-              <widget class="GtkLabel" id="ou_label">
-                <property name="visible">True</property>
-                <property name="label" translatable="yes">Подразделение</property>
-              </widget>
-              <packing>
-                <property name="top_attach">4</property>
-                <property name="bottom_attach">5</property>
-              </packing>
-            </child>
-            <child>
-              <widget class="GtkEntry" id="organizationalUnitName_entry">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-              </widget>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="right_attach">2</property>
-                <property name="top_attach">4</property>
-                <property name="bottom_attach">5</property>
-              </packing>
-            </child>
-            <child>
-              <widget class="GtkLabel" id="name_label">
-                <property name="visible">True</property>
-                <property name="label" translatable="yes">ФИО</property>
-              </widget>
-              <packing>
-                <property name="top_attach">5</property>
-                <property name="bottom_attach">6</property>
-              </packing>
-            </child>
-            <child>
-              <widget class="GtkEntry" id="commonName_entry">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-              </widget>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="right_attach">2</property>
-                <property name="top_attach">5</property>
-                <property name="bottom_attach">6</property>
-              </packing>
-            </child>
-            <child>
-              <widget class="GtkLabel" id="mail_label">
-                <property name="visible">True</property>
-                <property name="label" translatable="yes">Адрес электронной почты</property>
-              </widget>
-              <packing>
-                <property name="top_attach">6</property>
-                <property name="bottom_attach">7</property>
-              </packing>
-            </child>
-            <child>
-              <widget class="GtkEntry" id="emailAddress_entry">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-              </widget>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="right_attach">2</property>
-                <property name="top_attach">6</property>
-                <property name="bottom_attach">7</property>
-              </packing>
-            </child>
-            <child>
-              <widget class="GtkLabel" id="uid_label">
-                <property name="visible">True</property>
-                <property name="label" translatable="yes">UID</property>
-              </widget>
-              <packing>
-                <property name="top_attach">7</property>
-                <property name="bottom_attach">8</property>
-              </packing>
-            </child>
-            <child>
-              <widget class="GtkEntry" id="UID_entry">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-              </widget>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="right_attach">2</property>
-                <property name="top_attach">7</property>
-                <property name="bottom_attach">8</property>
               </packing>
             </child>
           </widget>
@@ -604,20 +603,15 @@ province</property>
             <property name="n_rows">2</property>
             <property name="n_columns">2</property>
             <child>
-              <widget class="GtkLabel" id="label6">
+              <widget class="GtkFileChooserButton" id="openssl_filechooserbutton">
                 <property name="visible">True</property>
-                <property name="label" translatable="yes">Рабочий каталог</property>
-              </widget>
-            </child>
-            <child>
-              <widget class="GtkFileChooserButton" id="workdir_filechooserbutton">
-                <property name="visible">True</property>
-                <property name="action">GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER</property>
-                <property name="title" translatable="yes">Выберите директорию</property>
+                <property name="title" translatable="yes">Найдите файл openssl</property>
               </widget>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="right_attach">2</property>
+                <property name="top_attach">1</property>
+                <property name="bottom_attach">2</property>
               </packing>
             </child>
             <child>
@@ -631,16 +625,21 @@ province</property>
               </packing>
             </child>
             <child>
-              <widget class="GtkFileChooserButton" id="openssl_filechooserbutton">
+              <widget class="GtkFileChooserButton" id="workdir_filechooserbutton">
                 <property name="visible">True</property>
-                <property name="title" translatable="yes">Найдите файл openssl</property>
+                <property name="action">GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER</property>
+                <property name="title" translatable="yes">Выберите директорию</property>
               </widget>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="right_attach">2</property>
-                <property name="top_attach">1</property>
-                <property name="bottom_attach">2</property>
               </packing>
+            </child>
+            <child>
+              <widget class="GtkLabel" id="label6">
+                <property name="visible">True</property>
+                <property name="label" translatable="yes">Рабочий каталог</property>
+              </widget>
             </child>
           </widget>
           <packing>
