@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-01-11 10:10+0300\n"
-"PO-Revision-Date: 2010-01-11 10:32+0300\n"
+"POT-Creation-Date: 2010-01-11 11:53+0300\n"
+"PO-Revision-Date: 2010-01-11 11:53+0300\n"
 "Last-Translator: Oleg P. Kluchkin <oleg.kluchkin@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -18,9 +18,105 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%"
 "10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: ../mSSL.py:91
+#: ../mSSL.py:102
 msgid " Getting Root-certificate"
+msgstr " Получение корневого сертификата"
+
+#: ../mSSL.py:105 ../mSSL.py:231
+msgid " Generating private key"
+msgstr " Генерация приватного ключа"
+
+#: ../mSSL.py:108
+msgid " Generating certificate requaest"
+msgstr " Генерация запроса сертификата"
+
+#: ../mSSL.py:111
+msgid " Getting own certificate"
+msgstr " Получение пользовательского сертификата"
+
+#: ../mSSL.py:114
+msgid " Building PKCS12 package"
+msgstr " Создание пакета PKCS12"
+
+#: ../mSSL.py:117
+msgid "Package created sucessfully !"
+msgstr " Пакет успешно создан!"
+
+#: ../mSSL.py:222
+msgid "Root certificate \n"
+msgstr " Корневой сертификат "
+
+#: ../mSSL.py:222 ../mSSL.py:298
+msgid "not found!"
+msgstr "не найден!"
+
+#: ../mSSL.py:223
+msgid ""
+"\n"
+"This file you may get in Certificate Center of your company."
 msgstr ""
+"\n"
+"Этот файл вы можете получить в Центре Сертификации вашей компании."
+
+#: ../mSSL.py:240 ../mSSL.py:324
+msgid "created sucessfully!\n"
+msgstr "создан успешно!\n"
+
+#: ../mSSL.py:247
+msgid " Generating certificate request"
+msgstr " Создание запроса сертификата"
+
+#: ../mSSL.py:250
+msgid "Private key \n"
+msgstr "Приватный ключ \n"
+
+#: ../mSSL.py:250 ../mSSL.py:281
+msgid "doesn't created!"
+msgstr "не создан!"
+
+#: ../mSSL.py:251 ../mSSL.py:282
+msgid "An unexpected error occured: contact support."
+msgstr "Возникла непредвиденная ошибка: обратитесь в службу технической подержки."
+
+#: ../mSSL.py:281
+msgid "Certificate request \n"
+msgstr "Запрос сертификата \n"
+
+#: ../mSSL.py:288
+msgid "get sucessfully!\n"
+msgstr "получен успешно!\n"
+
+#: ../mSSL.py:295
+msgid " Creating PKCS12 package"
+msgstr " Создание пакета PKCS12"
+
+#: ../mSSL.py:298
+msgid "Certificate \n"
+msgstr " Сертификат "
+
+#: ../mSSL.py:324 ../mSSL.py:335
+msgid "Package \n"
+msgstr "Пакет "
+
+#: ../mSSL.py:335
+msgid "does't created!"
+msgstr "не создан!"
+
+#: ../mSSL.py:336
+msgid ""
+"\n"
+"An unexpected error occured: contact support."
+msgstr ""
+"\n"
+"Возникла непредвиденная ошибка: обратитесь в службу технической подержки."
+
+#: ../mSSL.py:342
+msgid ""
+"This action remove all created files in working directory.\n"
+"Continue?"
+msgstr ""
+"Это действие удалит все созданные файлы в рабочей директории.\n"
+"Продолжить?"
 
 #: ../mSSL.glade.h:1
 msgid "About mSSL"
@@ -28,67 +124,57 @@ msgstr ""
 
 #: ../mSSL.glade.h:2
 msgid "Choose directory"
-msgstr ""
+msgstr "Выберите директорию"
 
 #: ../mSSL.glade.h:3
 msgid "Country"
-msgstr ""
+msgstr "Страна"
 
 #: ../mSSL.glade.h:4
-msgid ""
-"English\n"
-"Russian"
-msgstr ""
+msgid "Enter password:"
+msgstr "Введите пароль:"
+
+#: ../mSSL.glade.h:5
+msgid "Find openssl program"
+msgstr "Найдите программу OpenSSL"
 
 #: ../mSSL.glade.h:6
-msgid "Enter password:"
-msgstr ""
+msgid "Full name"
+msgstr "Полное имя"
 
 #: ../mSSL.glade.h:7
-msgid "Find openssl program"
-msgstr ""
+msgid "Full reset"
+msgstr "Полный сброс"
 
 #: ../mSSL.glade.h:8
-msgid "Full name"
-msgstr ""
+msgid "Locality name"
+msgstr "Наименование населенного пункта"
 
 #: ../mSSL.glade.h:9
-msgid "Full reset"
-msgstr ""
-
-#: ../mSSL.glade.h:10
-msgid "Language"
-msgstr ""
-
-#: ../mSSL.glade.h:11
-msgid "Locality name"
-msgstr ""
-
-#: ../mSSL.glade.h:12
 msgid "Ok"
 msgstr ""
 
-#: ../mSSL.glade.h:13
+#: ../mSSL.glade.h:10
 msgid "Organization"
-msgstr ""
+msgstr "Организация"
 
-#: ../mSSL.glade.h:14
+#: ../mSSL.glade.h:11
 msgid "Organization unit"
-msgstr ""
+msgstr "Подразделение"
 
-#: ../mSSL.glade.h:15
+#: ../mSSL.glade.h:12
 msgid "PKCS12"
 msgstr ""
 
-#: ../mSSL.glade.h:16
+#: ../mSSL.glade.h:13
 msgid "Path to openssl binary"
-msgstr ""
+msgstr "Путь к программе OpenSSL"
 
-#: ../mSSL.glade.h:17
+#: ../mSSL.glade.h:14
 msgid "Program preferences"
-msgstr ""
+msgstr "Настройки программы"
 
-#: ../mSSL.glade.h:18
+#: ../mSSL.glade.h:15
 msgid ""
 "Russia\n"
 "France\n"
@@ -96,68 +182,68 @@ msgid ""
 "USA"
 msgstr ""
 
-#: ../mSSL.glade.h:22
+#: ../mSSL.glade.h:19
 msgid "Type of locality"
-msgstr ""
+msgstr "Тип населенного пункта"
 
-#: ../mSSL.glade.h:23
+#: ../mSSL.glade.h:20
 msgid "UID"
 msgstr ""
 
-#: ../mSSL.glade.h:24
+#: ../mSSL.glade.h:21
 msgid "User creditionals"
-msgstr ""
+msgstr "Реквизиты пользователя"
 
-#: ../mSSL.glade.h:25
+#: ../mSSL.glade.h:22
 msgid "Working directory"
-msgstr ""
+msgstr "Рабочая директория"
 
-#: ../mSSL.glade.h:26
+#: ../mSSL.glade.h:23
 msgid "_Creditionals"
 msgstr "Реквизиты"
 
-#: ../mSSL.glade.h:27
+#: ../mSSL.glade.h:24
 msgid "_Help"
-msgstr ""
+msgstr "Помощь"
 
-#: ../mSSL.glade.h:28
+#: ../mSSL.glade.h:25
 msgid "_Menu"
 msgstr "Меню"
 
-#: ../mSSL.glade.h:29
+#: ../mSSL.glade.h:26
 msgid ""
 "city\n"
 "province"
 msgstr ""
 
-#: ../mSSL.glade.h:31
+#: ../mSSL.glade.h:28
 msgid "e-mail"
-msgstr ""
+msgstr "Электронная почта"
 
-#: ../mSSL.glade.h:32
+#: ../mSSL.glade.h:29
 msgid "gtk-about"
 msgstr ""
 
-#: ../mSSL.glade.h:33
+#: ../mSSL.glade.h:30
 msgid "gtk-cancel"
 msgstr ""
 
-#: ../mSSL.glade.h:34
+#: ../mSSL.glade.h:31
 msgid "gtk-execute"
 msgstr ""
 
-#: ../mSSL.glade.h:35
+#: ../mSSL.glade.h:32
 msgid "gtk-preferences"
 msgstr ""
 
-#: ../mSSL.glade.h:36
+#: ../mSSL.glade.h:33
 msgid "gtk-quit"
 msgstr ""
 
-#: ../mSSL.glade.h:37
+#: ../mSSL.glade.h:34
 msgid "gtk-save"
 msgstr ""
 
-#: ../mSSL.glade.h:38
+#: ../mSSL.glade.h:35
 msgid "mSSL"
 msgstr ""

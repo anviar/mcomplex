@@ -99,22 +99,22 @@ class mSSLgui:
 		
 		if start_step == 0 :
 				main_progress.set_fraction(0)
-				main_progress.set_text ("1/" + str(max_step) + unicode(" Getting Root-certificate"))
+				main_progress.set_text ("1/" + str(max_step) + unicode(_(" Getting Root-certificate")))
 		elif start_step == 1 :
 				main_progress.set_fraction(1.0/max_step)
-				main_progress.set_text("2/" + str(max_step) + unicode(" Generating private key"))
+				main_progress.set_text("2/" + str(max_step) + unicode(_(" Generating private key")))
 		elif start_step == 2 :
 				main_progress.set_fraction(2.0/max_step)
-				main_progress.set_text("3/" + str(max_step) + unicode(" Generating certificate requaest"))
+				main_progress.set_text("3/" + str(max_step) + unicode(_(" Generating certificate requaest")))
 		elif start_step == 3 :
 				main_progress.set_fraction(3.0/max_step)
-				main_progress.set_text("4/" + str(max_step) + unicode(" Getting own certificate"))
+				main_progress.set_text("4/" + str(max_step) + unicode(_(" Getting own certificate")))
 		elif start_step == 4 :
 				main_progress.set_fraction(4.0/max_step)
-				main_progress.set_text("5/" + str(max_step) + unicode(" Building PKCS12 package"))
+				main_progress.set_text("5/" + str(max_step) + unicode(_(" Building PKCS12 package")))
 		elif start_step == 5 :
 				main_progress.set_fraction(1)
-				main_progress.set_text(unicode("Package created sucessfully !"))
+				main_progress.set_text(unicode(_("Package created sucessfully !")))
 		window.connect("destroy", self.close_app)
 		window.show()
 	
@@ -219,8 +219,8 @@ class mSSLgui:
 		if step == 0 :
 				if not os.path.exists( workdir_path +"cacert.pem" ) :
 					dialog = gtk.MessageDialog(None, gtk.DIALOG_MODAL, gtk.MESSAGE_ERROR,gtk.BUTTONS_CLOSE, 
-							unicode("Root certificate \n" + workdir_path + "cacert.pem not found!\n" +
-								"This file you may get in Certificate Center of your company."))
+							unicode(_("Root certificate \n") + workdir_path + "cacert.pem "+ _("not found!") +
+								_("\nThis file you may get in Certificate Center of your company.")))
 					dialog.run()
 					dialog.destroy()
 				else :
@@ -228,7 +228,7 @@ class mSSLgui:
 					config.find("user_creditionals").set ("step",str(step))
 					ctree.write ( properties_file )
 					main_progress.set_fraction(1.0/max_step)
-					main_progress.set_text("2/" + str(max_step) + unicode(" Generating private key"))	
+					main_progress.set_text("2/" + str(max_step) + unicode(_(" Generating private key")))	
 		elif step == 1 :
 				cur_command = openssl_bin_program + ' genrsa -out "' + workdir_path + 'privkey.pem" 2048'
 				if sys.platform == "win32" :
@@ -237,18 +237,18 @@ class mSSLgui:
 					os.system(cur_command)
 				if os.path.exists( workdir_path +"privkey.pem" ) :
 					dialog = gtk.MessageDialog(None, gtk.DIALOG_MODAL, gtk.MESSAGE_INFO,gtk.BUTTONS_OK, 
-								unicode("Private key  \n" + workdir_path + "private.pem created sucessfully!\n"))
+								unicode("Private key  \n" + workdir_path + "private.pem "+_("created sucessfully!\n")))
 					dialog.run()
 					dialog.destroy()				
 					if not step == max_step : step += 1
 					config.find("user_creditionals").set ("step",str(step))
 					ctree.write ( properties_file )
 					main_progress.set_fraction(2.0/max_step)
-					main_progress.set_text("3/" + str(max_step) + unicode(" Generating certificate request"))
+					main_progress.set_text("3/" + str(max_step) + unicode(_(" Generating certificate request")))
 				else :
 					dialog = gtk.MessageDialog(None, gtk.DIALOG_MODAL, gtk.MESSAGE_ERROR,gtk.BUTTONS_CLOSE, 
-							unicode("Private key \n" + workdir_path + "private.pem doesn't created!" +
-								"An unexpected error occured: contact support."))
+							unicode(_("Private key \n") + workdir_path + "private.pem "+_("doesn't created!") +
+								_("An unexpected error occured: contact support.")))
 					dialog.run()
 					dialog.destroy()
 					
@@ -278,24 +278,24 @@ class mSSLgui:
 					main_progress.set_text("4/" + str(max_step) + unicode(" Getting personal certificate"))
 				else :
 					dialog = gtk.MessageDialog(None, gtk.DIALOG_MODAL, gtk.MESSAGE_ERROR,gtk.BUTTONS_CLOSE, 
-							unicode("Certificate request \n" + workdir_path + "user-cert.csr doesn't created!" +
-								"An unexpected error occured: contact support."))
+							unicode(_("Certificate request \n") + workdir_path + "user-cert.csr "+_("doesn't created!") +
+								_("An unexpected error occured: contact support.")))
 					dialog.run()
 					dialog.destroy()
 		elif step == 3 :
 				if os.path.exists( workdir_path +"user-cert.pem" ) :
 					dialog = gtk.MessageDialog(None, gtk.DIALOG_MODAL, gtk.MESSAGE_INFO,gtk.BUTTONS_OK, 
-								unicode("Certificate  \n" + workdir_path + "user-cert.pem get sucessfully!\n"))
+								unicode("Certificate  \n" + workdir_path + "user-cert.pem "+_("get sucessfully!\n")))
 					dialog.run()
 					dialog.destroy()				
 					if not step == max_step : step += 1
 					config.find("user_creditionals").set ("step",str(step))
 					ctree.write ( properties_file )
 					main_progress.set_fraction(4.0/max_step)
-					main_progress.set_text("5/" + str(max_step) + unicode(" Creating PKCS12 package"))
+					main_progress.set_text("5/" + str(max_step) + unicode(_(" Creating PKCS12 package")))
 				else :
 					dialog = gtk.MessageDialog(None, gtk.DIALOG_MODAL, gtk.MESSAGE_ERROR,gtk.BUTTONS_CLOSE, 
-							unicode("Certificate \n" + workdir_path.decode("utf-8") + "user-cert.pem not found!" ))
+							unicode(_("Certificate \n") + workdir_path.decode("utf-8") + "user-cert.pem "+_("not found!") ))
 					dialog.run()
 					dialog.destroy()
 
@@ -321,7 +321,7 @@ class mSSLgui:
 
 				if os.path.exists( workdir_path +"user.p12" ) :
 					dialog = gtk.MessageDialog(None, gtk.DIALOG_MODAL, gtk.MESSAGE_INFO,gtk.BUTTONS_OK, 
-								unicode("Package \n" + workdir_path + "user.p12 created sucessfully!\n"))
+								unicode(_("Package \n") + workdir_path + "user.p12 "+_("created sucessfully!\n")))
 					dialog.run()
 					dialog.destroy()				
 					if not step == max_step :
@@ -332,14 +332,14 @@ class mSSLgui:
 						main_progress.set_text(unicode("Packege created sucessfully!"))
 				else :
 					dialog = gtk.MessageDialog(None, gtk.DIALOG_MODAL, gtk.MESSAGE_ERROR,gtk.BUTTONS_CLOSE, 
-							unicode("Package \n" + workdir_path + "user.p12 does't created! \n" + 
-								"An unexpected error occured: contact support." ))
+							unicode(_("Package \n") + workdir_path + "user.p12 "+_("does't created!") + 
+								_("\nAn unexpected error occured: contact support.")))
 					dialog.run()
 					dialog.destroy()
 
 	def reset_clicked(self, widget):
 		dialog = gtk.MessageDialog(None, gtk.DIALOG_MODAL, gtk.MESSAGE_QUESTION,gtk.BUTTONS_YES_NO, 
-			unicode("This action remove all created files in working directory.\nContinue?"))
+			unicode(_("This action remove all created files in working directory.\nContinue?")))
 		response=dialog.run()
 		dialog.destroy()				
 		if response == gtk.RESPONSE_YES :
